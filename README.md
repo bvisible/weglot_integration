@@ -1,6 +1,6 @@
 # Weglot Integration for Frappe Framework
 
-![Weglot](https://weglot.com/wp-content/themes/weglot/dist/images/weglot-logo.svg)
+![Weglot](https://raw.githubusercontent.com/bvisible/weglot_integration/refs/heads/main/weglot_integration/public/img/weglot_logo.svg)
 
 This Frappe application provides seamless integration with [Weglot](https://weglot.com), a powerful translation solution that enables you to make your Frappe website multilingual in minutes without any coding.
 
