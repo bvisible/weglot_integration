@@ -1,0 +1,339 @@
+{# weglot_integration/templates/includes/language_dropdown.html #}
+
+{#
+Usage:
+{% include "weglot_integration/templates/includes/language_dropdown.html" 
+   with
+   style="dropdown", (options: "dropdown", "buttons", "select")
+   position="right", (options: "left", "right", "center")
+   languages=["en", "fr", "es", "de"], (optional, defaults to all available languages)
+   custom_class="my-custom-class", (optional)
+   button_text=True, (optional, shows language name next to flag)
+   full_names=False (optional, shows full language names instead of codes)
+%}
+#}
+
+{% set style = style | default("dropdown") %}
+{% set position = position | default("right") %}
+{% set button_text = button_text | default(False) %}
+{% set full_names = full_names | default(False) %}
+{% set custom_class = custom_class | default("") %}
+
+{# Mapping of language codes to full names #}
+{% set lang_names = {
+    "ar": "Arabic",
+    "bg": "Bulgarian",
+    "cs": "Czech",
+    "da": "Danish",
+    "de": "German",
+    "el": "Greek",
+    "en": "English",
+    "es": "Spanish",
+    "fi": "Finnish",
+    "fr": "French",
+    "hi": "Hindi",
+    "hr": "Croatian",
+    "hu": "Hungarian",
+    "it": "Italian",
+    "ja": "Japanese",
+    "ko": "Korean",
+    "lt": "Lithuanian",
+    "nl": "Dutch",
+    "no": "Norwegian",
+    "pl": "Polish",
+    "pt": "Portuguese",
+    "ro": "Romanian",
+    "ru": "Russian",
+    "sk": "Slovak",
+    "sl": "Slovenian",
+    "sv": "Swedish",
+    "th": "Thai",
+    "tr": "Turkish",
+    "uk": "Ukrainian",
+    "vi": "Vietnamese",
+    "zh": "Chinese"
+} %}
+
+<div class="weglot-container {{ custom_class }} weglot-position-{{ position }}">
+  {% if style == "dropdown" %}
+    <div class="weglot-dropdown">
+      <button class="weglot-dropdown-toggle">
+        <span class="weglot-current-language">
+          <span class="weglot-language-flag"></span>
+          {% if button_text %}
+            <span class="weglot-language-text"></span>
+          {% endif %}
+        </span>
+        <span class="weglot-dropdown-arrow">▼</span>
+      </button>
+      <div class="weglot-dropdown-menu">
+        {# This will be populated by Weglot JS #}
+        {% if languages %}
+          <div class="weglot-custom-languages" data-languages="{{ languages|join(',') }}"></div>
+        {% endif %}
+      </div>
+    </div>
+  {% elif style == "buttons" %}
+    <div class="weglot-buttons">
+      {# This will be populated by Weglot JS #}
+      {% if languages %}
+        <div class="weglot-custom-languages" data-languages="{{ languages|join(',') }}"></div>
+      {% endif %}
+    </div>
+  {% elif style == "select" %}
+    <select class="weglot-select">
+      {# This will be populated by Weglot JS #}
+      {% if languages %}
+        <div class="weglot-custom-languages" data-languages="{{ languages|join(',') }}"></div>
+      {% endif %}
+    </select>
+  {% endif %}
+</div>
+
+<style>
+  .weglot-container {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", sans-serif;
+    display: inline-block;
+    position: relative;
+  }
+  
+  .weglot-position-left {
+    text-align: left;
+  }
+  
+  .weglot-position-right {
+    text-align: right;
+  }
+  
+  .weglot-position-center {
+    text-align: center;
+  }
+  
+  /* Dropdown style */
+  .weglot-dropdown {
+    position: relative;
+    display: inline-block;
+  }
+  
+  .weglot-dropdown-toggle {
+    background-color: transparent;
+    border: 1px solid #e5e7eb;
+    border-radius: 4px;
+    padding: 8px 12px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  
+  .weglot-dropdown-toggle:hover {
+    background-color: #f9fafb;
+  }
+  
+  .weglot-dropdown-menu {
+    display: none;
+    position: absolute;
+    background-color: white;
+    min-width: 160px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    z-index: 1000;
+    border-radius: 4px;
+    margin-top: 2px;
+    right: 0;
+  }
+  
+  .weglot-position-left .weglot-dropdown-menu {
+    left: 0;
+    right: auto;
+  }
+  
+  .weglot-position-center .weglot-dropdown-menu {
+    left: 50%;
+    transform: translateX(-50%);
+    right: auto;
+  }
+  
+  .weglot-dropdown:hover .weglot-dropdown-menu {
+    display: block;
+  }
+  
+  /* Button style */
+  .weglot-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+  }
+  
+  .weglot-buttons a {
+    border: 1px solid #e5e7eb;
+    border-radius: 4px;
+    padding: 5px 10px;
+    text-decoration: none;
+    color: #374151;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+  
+  .weglot-buttons a:hover {
+    background-color: #f9fafb;
+  }
+  
+  /* Select style */
+  .weglot-select {
+    padding: 8px 12px;
+    border: 1px solid #e5e7eb;
+    border-radius: 4px;
+    background-color: white;
+  }
+</style>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  // This script will enhance the template once Weglot is fully loaded
+  // We need to wait for Weglot to initialize
+  
+  var checkWeglot = setInterval(function() {
+    if (window.Weglot && window.Weglot.initialized === true) {
+      clearInterval(checkWeglot);
+      
+      // Get current language
+      var currentLang = Weglot.getCurrentLang();
+      
+      // Get available languages
+      var languages = Weglot.getLanguages();
+      
+      // Find custom language constraints
+      var customLanguagesEls = document.querySelectorAll('.weglot-custom-languages');
+      customLanguagesEls.forEach(function(el) {
+        var customLangs = el.getAttribute('data-languages');
+        if (customLangs) {
+          var langArray = customLangs.split(',');
+          
+          // Filter languages to only show those specified
+          languages = languages.filter(function(lang) {
+            return langArray.includes(lang.code);
+          });
+          
+          // Remove this element since we don't need it anymore
+          el.parentNode.removeChild(el);
+        }
+      });
+      
+      // Update dropdowns
+      var dropdowns = document.querySelectorAll('.weglot-dropdown');
+      dropdowns.forEach(function(dropdown) {
+        var toggle = dropdown.querySelector('.weglot-dropdown-toggle');
+        var currentLangEl = dropdown.querySelector('.weglot-current-language');
+        var menu = dropdown.querySelector('.weglot-dropdown-menu');
+        
+        // Set current language
+        var flagSpan = currentLangEl.querySelector('.weglot-language-flag');
+        flagSpan.className = 'weglot-language-flag flag-' + currentLang;
+        
+        var textSpan = currentLangEl.querySelector('.weglot-language-text');
+        if (textSpan) {
+          var fullNames = {{ full_names|tojson }};
+          textSpan.textContent = fullNames ? 
+            {{ lang_names|tojson }}[currentLang] || currentLang.toUpperCase() : 
+            currentLang.toUpperCase();
+        }
+        
+        // Clear and rebuild menu
+        menu.innerHTML = '';
+        
+        // Add language options
+        languages.forEach(function(lang) {
+          if (lang.code !== currentLang) {
+            var item = document.createElement('a');
+            item.href = '#';
+            item.setAttribute('data-wg-notranslate', 'true');
+            item.className = 'weglot-language-item';
+            item.onclick = function(e) {
+              e.preventDefault();
+              Weglot.switchTo(lang.code);
+            };
+            
+            var flag = document.createElement('span');
+            flag.className = 'weglot-language-flag flag-' + lang.code;
+            item.appendChild(flag);
+            
+            var text = document.createElement('span');
+            text.className = 'weglot-language-text';
+            text.textContent = {{ full_names|tojson }} ? 
+              {{ lang_names|tojson }}[lang.code] || lang.code.toUpperCase() : 
+              lang.code.toUpperCase();
+            item.appendChild(text);
+            
+            menu.appendChild(item);
+          }
+        });
+      });
+      
+      // Update buttons
+      var buttonContainers = document.querySelectorAll('.weglot-buttons');
+      buttonContainers.forEach(function(container) {
+        // Clear and rebuild buttons
+        container.innerHTML = '';
+        
+        // Add language buttons
+        languages.forEach(function(lang) {
+          var button = document.createElement('a');
+          button.href = '#';
+          button.setAttribute('data-wg-notranslate', 'true');
+          button.className = 'weglot-language-button';
+          if (lang.code === currentLang) {
+            button.className += ' weglot-active';
+          }
+          button.onclick = function(e) {
+            e.preventDefault();
+            Weglot.switchTo(lang.code);
+          };
+          
+          var flag = document.createElement('span');
+          flag.className = 'weglot-language-flag flag-' + lang.code;
+          button.appendChild(flag);
+          
+          if ({{ button_text|tojson }}) {
+            var text = document.createElement('span');
+            text.className = 'weglot-language-text';
+            text.textContent = {{ full_names|tojson }} ? 
+              {{ lang_names|tojson }}[lang.code] || lang.code.toUpperCase() : 
+              lang.code.toUpperCase();
+            button.appendChild(text);
+          }
+          
+          container.appendChild(button);
+        });
+      });
+      
+      // Update selects
+      var selects = document.querySelectorAll('.weglot-select');
+      selects.forEach(function(select) {
+        // Clear and rebuild options
+        select.innerHTML = '';
+        
+        // Add language options
+        languages.forEach(function(lang) {
+          var option = document.createElement('option');
+          option.value = lang.code;
+          option.textContent = {{ full_names|tojson }} ? 
+            {{ lang_names|tojson }}[lang.code] || lang.code.toUpperCase() : 
+            lang.code.toUpperCase();
+          
+          if (lang.code === currentLang) {
+            option.selected = true;
+          }
+          
+          select.appendChild(option);
+        });
+        
+        // Add change handler
+        select.onchange = function() {
+          Weglot.switchTo(this.value);
+        };
+      });
+    }
+  }, 100); // Check every 100ms
+});
+</script>
