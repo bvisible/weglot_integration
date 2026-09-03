@@ -1,0 +1,39 @@
+# French translations for Weglot Integration.
+# Copyright (C) 2026 Neoffice Team
+# This file is distributed under the same license as the Weglot Integration project.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Weglot Integration VERSION\n"
+"Report-Msgid-Bugs-To: hello@neoffice.io\n"
+"POT-Creation-Date: 2026-09-03 04:53+0000\n"
+"PO-Revision-Date: 2026-09-03 04:53+0000\n"
+"Last-Translator: hello@neoffice.io\n"
+"Language-Team: hello@neoffice.io\n"
+"Language: fr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"Generated-By: Babel 2.13.1\n"
+
+#. Label of a Password field in DocType 'Weglot Settings'
+#: weglot_integration/weglot_integration/doctype/weglot_settings/weglot_settings.json
+msgid "API Key"
+msgstr "Clé API"
+
+#. Label of a Check field in DocType 'Weglot Settings'
+#: weglot_integration/weglot_integration/doctype/weglot_settings/weglot_settings.json
+msgid "Activate Weglot"
+msgstr "Activer Weglot"
+
+#. Name of a role
+#: weglot_integration/weglot_integration/doctype/weglot_settings/weglot_settings.json
+msgid "System Manager"
+msgstr "System Manager"
+
+#. Name of a DocType
+#: weglot_integration/weglot_integration/doctype/weglot_settings/weglot_settings.json
+msgid "Weglot Settings"
+msgstr "Paramètres Weglot"
