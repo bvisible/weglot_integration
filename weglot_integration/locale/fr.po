@@ -28,8 +28,11 @@ msgstr "Clé API"
 msgid "Activate Weglot"
 msgstr "Activer Weglot"
 
+# no opinion on purpose: repeating the source erases the translation another
+# app ships (neoffice-maintenance#335)
 #. Name of a role
 #: weglot_integration/weglot_integration/doctype/weglot_settings/weglot_settings.json
+#, fuzzy
 msgid "System Manager"
 msgstr "System Manager"
 
