@@ -7,7 +7,10 @@ app_license = "mit"
 
 # Apps
 # ------------------
-web_include_js = ["https://cdn.weglot.com/weglot.min.js", "/assets/weglot_integration/js/weglot_init.js"]
+# Only the loader: it adds Weglot's own script, async and only where Weglot is enabled
+# (neoffice-maintenance#355). `?v=2` so that a browser holding the old loader, which expected
+# weglot.min.js to be loaded before it, fetches this one.
+web_include_js = ["/assets/weglot_integration/js/weglot_init.js?v=2"]
 
 # required_apps = []
 
