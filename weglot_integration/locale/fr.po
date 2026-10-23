@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Weglot Integration VERSION\n"
 "Report-Msgid-Bugs-To: hello@neoffice.io\n"
-"POT-Creation-Date: 2026-10-22 03:39+0000\n"
+"POT-Creation-Date: 2026-10-23 03:39+0000\n"
 "PO-Revision-Date: 2026-09-03 04:53+0000\n"
 "Last-Translator: hello@neoffice.io\n"
 "Language-Team: hello@neoffice.io\n"
@@ -16,27 +16,27 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"Generated-By: Babel 2.13.1\n"
+"Generated-By: Babel 2.18.0\n"
 
 #. Label of a Password field in DocType 'Weglot Settings'
-#: weglot_integration/weglot_integration/doctype/weglot_settings/weglot_settings.json
+#: weglot_integration/weglot_integration/doctype/weglot_settings/weglot_settings.json:23
 msgid "API Key"
 msgstr "Clé API"
 
 #. Label of a Check field in DocType 'Weglot Settings'
-#: weglot_integration/weglot_integration/doctype/weglot_settings/weglot_settings.json
+#: weglot_integration/weglot_integration/doctype/weglot_settings/weglot_settings.json:16
 msgid "Activate Weglot"
 msgstr "Activer Weglot"
 
 # no opinion on purpose: repeating the source erases the translation another
 # app ships (neoffice-maintenance#335)
 #. Name of a role
-#: weglot_integration/weglot_integration/doctype/weglot_settings/weglot_settings.json
+#: weglot_integration/weglot_integration/doctype/weglot_settings/weglot_settings.json:42
 #, fuzzy
 msgid "System Manager"
 msgstr "System Manager"
 
 #. Name of a DocType
-#: weglot_integration/weglot_integration/doctype/weglot_settings/weglot_settings.json
+#: weglot_integration/weglot_integration/doctype/weglot_settings/weglot_settings.json:33
 msgid "Weglot Settings"
 msgstr "Paramètres Weglot"
