@@ -1,5 +1,16 @@
 # Weglot Integration for Frappe Framework
 
+> [!WARNING]
+> **Deprecated (2026-10-31).** Neoffice sites and shops are translated natively now: the theme, the shop and the page
+> builder keep the translations themselves (one address per language, `hreflang`, a feed per language, the buyer's
+> language on the cart, the order and its emails). Nothing new is added to this app.
+>
+> * On a site where Weglot is **disabled**, the update pipeline uninstalls this app (with the usual backup of the site).
+> * On a site where Weglot is **enabled**, or where a page still names it, the app stays and is reported, until that site
+>   moves to the native languages.
+> * The app is not removed from the bench by the update, and it is not marked as retired for the fleet: it leaves a site
+>   only through its own uninstall.
+
 ![Weglot](https://raw.githubusercontent.com/bvisible/weglot_integration/refs/heads/main/weglot_integration/public/img/weglot_logo.svg)
 
 This Frappe application provides seamless integration with [Weglot](https://weglot.com), a powerful translation solution that enables you to make your Frappe website multilingual in minutes without any coding.
